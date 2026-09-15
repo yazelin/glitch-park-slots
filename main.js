@@ -6,6 +6,7 @@ const $=s=>document.querySelector(s), statusEl=$("#status"), spinButton=$("#spin
 const embedded=self!==top, THEME="./assets/audio/glitch-park-theme.mp3";
 if(embedded){
   const brand=exitButton.closest(".brand"),topLeft=document.createElement("div"),style=document.createElement("style");
+  document.documentElement.classList.add("embedded");
   topLeft.className="topLeft";brand.before(topLeft);topLeft.append(exitButton,brand);
   style.textContent=".topLeft{display:flex;align-items:flex-start;gap:8px}";document.head.append(style);
 }
