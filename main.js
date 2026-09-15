@@ -11,14 +11,14 @@ if(embedded){
   style.textContent=".topLeft{display:flex;align-items:flex-start;gap:8px}";document.head.append(style);
 }
 let soundEnabled=true, themeAudio, audioContext, phase="waiting", phaseTime=0, results=[0,0,0], targets=[0,0,0], stopped=[false,false,false], nextTick=[0,0,0], look={x:0,y:0,tx:0,ty:0},effectFlash=0,celebrationTime=0,coinTime=0,paylineTime=0;
-Store.load();
+Store.load().then(renderCollection);
 
 function requestTheme(action,muted=false){
   if(embedded){ parent.postMessage({type:"glitch-park:music",action,track:"theme",url:new URL(THEME,location.href).href,muted},"*"); return; }
   themeAudio||=Object.assign(new Audio(THEME),{loop:true,volume:.27}); themeAudio.muted=muted;
   if(action==="play"&&!muted) themeAudio.play().catch(()=>{}); if(action==="pause") themeAudio.pause();
 }
-if(embedded){exitButton.hidden=false;exitButton.onclick=()=>parent.postMessage({type:"slots:exit"},"*");}
+if(embedded){exitButton.hidden=false;exitButton.onclick=()=>parent.postMessage({type:"slots:exit",complete:Store.data.owned.length===CHARACTERS.length},"*");}
 else requestTheme("play");
 function beep(freq=440,duration=.08,volume=.05,type="sine"){
   if(!soundEnabled)return; audioContext||=new(window.AudioContext||window.webkitAudioContext)(); const o=audioContext.createOscillator(),g=audioContext.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(volume,audioContext.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);o.connect(g).connect(audioContext.destination);o.start();o.stop(audioContext.currentTime+duration);
