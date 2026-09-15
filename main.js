@@ -4,7 +4,11 @@ import { Store } from "./store.js";
 
 const $=s=>document.querySelector(s), statusEl=$("#status"), spinButton=$("#spin"), soundButton=$("#sound"), exitButton=$("#exit"), collectionButton=$("#collectionButton"), reveal=$("#reveal"), collection=$("#collection");
 const embedded=self!==top, THEME="./assets/audio/glitch-park-theme.mp3";
-if(embedded)document.documentElement.classList.add("embedded");
+if(embedded){
+  const brand=exitButton.closest(".brand"),topLeft=document.createElement("div"),style=document.createElement("style");
+  topLeft.className="topLeft";brand.before(topLeft);topLeft.append(exitButton,brand);
+  style.textContent=".topLeft{display:flex;align-items:flex-start;gap:8px}";document.head.append(style);
+}
 let soundEnabled=true, themeAudio, audioContext, phase="waiting", phaseTime=0, results=[0,0,0], targets=[0,0,0], stopped=[false,false,false], nextTick=[0,0,0], look={x:0,y:0,tx:0,ty:0},effectFlash=0,celebrationTime=0,coinTime=0,paylineTime=0;
 Store.load();
 
