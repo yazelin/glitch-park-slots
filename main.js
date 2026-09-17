@@ -3,7 +3,7 @@ import { CHARACTERS, avatarStyle } from "./characters.js";
 import { Store } from "./store.js";
 
 const $=s=>document.querySelector(s), statusEl=$("#status"), spinButton=$("#spin"), soundButton=$("#sound"), exitButton=$("#exit"), collectionButton=$("#collectionButton"), reveal=$("#reveal"), collection=$("#collection");
-const embedded=self!==top, THEME="./assets/audio/glitch-park-theme.mp3";
+const embedded=self!==top, THEME="https://cdn.jsdelivr.net/gh/yazelin/glitch-park-claw@main/assets/audio/glitch-park-theme.mp3";
 if(embedded){
   const brand=exitButton.closest(".brand"),topLeft=document.createElement("div"),style=document.createElement("style");
   document.documentElement.classList.add("embedded");

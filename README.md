@@ -21,3 +21,6 @@ python3 -m http.server 4173
 瀏覽 `http://127.0.0.1:4173/`。角色圖使用單一 Atlas，Three.js 也放在 repo 內，不依賴外部 CDN。
 
 日後嵌入 Larch 時，頁面會自動顯示「離開」按鈕，並以 `postMessage` 交由外層播放遊樂園主題曲。
+
+主題曲改從 jsDelivr 載（五款共用同一個網址，瀏覽器快取共用）：`https://cdn.jsdelivr.net/gh/yazelin/glitch-park-claw@main/assets/audio/glitch-park-theme.mp3`。
+Pages 直連 700 KB 要 11 秒、jsDelivr 1 秒。改檔要 purge：`https://purge.jsdelivr.net/gh/yazelin/glitch-park-claw@main/assets/audio/glitch-park-theme.mp3`。
